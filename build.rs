@@ -44,6 +44,9 @@ fn main() {
     } else if env.contains("windows") {
         cfg.cpp(true);
         cfg.file(nfd!("nfd_win.cpp"));
+        if !cfg!(windows) {
+            cfg.flag("-fpermissive");
+        }
         cfg.compile("libnfd.a");
         println!("cargo:rustc-link-lib=ole32");
         println!("cargo:rustc-link-lib=shell32");
